@@ -1,7 +1,5 @@
 package com.fannyarvid.foodorganizer;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,8 +18,6 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity {
 
     public static final int NUM_PAGES = 2;
-    public static final int FOOD_LIST_PAGE = 0;
-    public static final int INGREDIENT_LIST_PAGE = 1;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,7 +36,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final ActionBar actionBar = getActionBar();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -51,46 +46,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setOnPageChangeListener(
-                new ViewPager.SimpleOnPageChangeListener() {
-                    @Override
-                    public void onPageSelected(int position) {
-                        // When swiping between pages, select the
-                        // corresponding tab.
-                        getActionBar().setSelectedNavigationItem(position);
-                    }
-                });
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        // Specify that tabs should be displayed in the action bar.
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        // Create a tab listener that is called when the user changes tabs.
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // When the tab is selected, switch to the
-                // corresponding page in the ViewPager.
-                mViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // hide the given tab
-            }
-
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // probably ignore this event
-            }
-        };
-
-        // Add 3 tabs, specifying the tab's text and TabListener
-        for (int i = 0; i < 3; i++) {
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText("Tab " + (i + 1))
-                            .setTabListener(tabListener));
-        }
-
-
 
     }
 
@@ -137,8 +93,8 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
-            return NUM_PAGES;
+            // Show 3 total pages.
+            return 3;
         }
 
         @Override
