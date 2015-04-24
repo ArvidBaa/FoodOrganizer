@@ -16,7 +16,7 @@ public class FoodContract {
 
     public static final String PATH_BOX = "box";
     public static final String PATH_INGREDIENT = "ingredient";
-    public static final String PATH_LINK = "link";
+    public static final String PATH_FOOD = "link";
 
     public static final class BoxEntry implements BaseColumns {
         public static final Uri CONTENT_URI =
@@ -63,21 +63,21 @@ public class FoodContract {
         }
     }
 
-    public static final class LinkEntry implements BaseColumns {
+    public static final class FoodEntry implements BaseColumns {
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_LINK).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_FOOD).build();
 
         public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINK;
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_FOOD;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_LINK;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_FOOD;
 
-        public static final String TABLE_NAME = "link";
+        public static final String TABLE_NAME = "food";
 
         public static final String COLUMN_BOX_KEY = "box_id";
         public static final String COLUMN_INGREDIENT_KEY = "ingredient_id";
 
-        public static Uri buildIngredientUri (long id) {
+        public static Uri buildFoodUri (long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

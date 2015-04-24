@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.fannyarvid.foodorganizer.data.FoodContract.BoxEntry;
 import com.fannyarvid.foodorganizer.data.FoodContract.IngredientEntry;
-import com.fannyarvid.foodorganizer.data.FoodContract.LinkEntry;
+import com.fannyarvid.foodorganizer.data.FoodContract.FoodEntry;
 
 /**
  * Created by FannyArvid on 2015-04-24.
@@ -43,15 +43,15 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 " );";
 
         final String SQL_CREATE_LINK_TABLE = "CREATE TABLE " +
-                LinkEntry.TABLE_NAME + " (" +
-                LinkEntry._ID + " INTEGER PRIMARY KEY, " +
-                LinkEntry.COLUMN_BOX_KEY + " INTEGER NOT NULL, " +
-                LinkEntry.COLUMN_INGREDIENT_KEY + " INTEGER NOT NULL, " +
+                FoodEntry.TABLE_NAME + " (" +
+                FoodEntry._ID + " INTEGER PRIMARY KEY, " +
+                FoodEntry.COLUMN_BOX_KEY + " INTEGER NOT NULL, " +
+                FoodEntry.COLUMN_INGREDIENT_KEY + " INTEGER NOT NULL, " +
 
-                " FOREIGN KEY (" + LinkEntry.COLUMN_BOX_KEY + ") REFERENCES " +
+                " FOREIGN KEY (" + FoodEntry.COLUMN_BOX_KEY + ") REFERENCES " +
                 BoxEntry.TABLE_NAME + " (" + BoxEntry._ID + "), " +
 
-                " FOREIGN KEY (" + LinkEntry.COLUMN_INGREDIENT_KEY + ") REFERENCES " +
+                " FOREIGN KEY (" + FoodEntry.COLUMN_INGREDIENT_KEY + ") REFERENCES " +
                 IngredientEntry.TABLE_NAME + " (" + IngredientEntry._ID + ");";
 
         db.execSQL(SQL_CREATE_BOX_TABLE);
@@ -64,7 +64,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + BoxEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + IngredientEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + LinkEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FoodEntry.TABLE_NAME);
         onCreate(db);
 
     }
