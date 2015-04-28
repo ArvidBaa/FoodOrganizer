@@ -29,7 +29,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 BoxEntry.TABLE_NAME + " (" +
                 BoxEntry._ID + " INTEGER PRIMARY KEY, " +
                 BoxEntry.COLUMN_FOOD_NAME + " TEXT NOT NULL, " +
-                BoxEntry.COLUMN_DATE + " INTEGER NOT NULL AUTOINCREMENT, " +
+                BoxEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
                 BoxEntry.COLUMN_STORAGE_TYPE + " INTEGER NOT NULL, " +
                 BoxEntry.COLUMN_HAS_BEEN_IN_FREEZER + " INTEGER NOT NULL " +
                 " );";
@@ -52,7 +52,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 BoxEntry.TABLE_NAME + " (" + BoxEntry._ID + "), " +
 
                 " FOREIGN KEY (" + FoodEntry.COLUMN_INGREDIENT_KEY + ") REFERENCES " +
-                IngredientEntry.TABLE_NAME + " (" + IngredientEntry._ID + ");";
+                IngredientEntry.TABLE_NAME + " (" + IngredientEntry._ID + "));";
 
         db.execSQL(SQL_CREATE_BOX_TABLE);
         db.execSQL(SQL_CREATE_INGREDIENT_TABLE);

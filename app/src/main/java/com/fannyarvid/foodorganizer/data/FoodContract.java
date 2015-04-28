@@ -11,7 +11,7 @@ import android.text.format.Time;
  */
 public class FoodContract {
 
-    public static final String CONTENT_AUTHORITY = "com.fannyarvid.foodorganizer.app";
+    public static final String CONTENT_AUTHORITY = "com.fannyarvid.foodorganizer";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 

@@ -21,7 +21,7 @@ public class TestProvider extends AndroidTestCase {
     public static final String LOG_TAG = TestProvider.class.getSimpleName();
 
     public void deleteAllRecordsFromProvider() {
-        mContext.getContentResolver().delete(
+        mContext.getContentResolver() .delete(
                 FoodEntry.CONTENT_URI,
                 null,
                 null
@@ -145,6 +145,7 @@ public class TestProvider extends AndroidTestCase {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues testValues = TestUtilities.createBoxValues();
+        long boxRowId = TestUtilities.insertBoxValues(mContext);
 
         Cursor boxCursor = mContext.getContentResolver().query(
                 BoxEntry.CONTENT_URI,
@@ -167,6 +168,7 @@ public class TestProvider extends AndroidTestCase {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues testValues = TestUtilities.createIngredientValues();
+        long ingredientRowId = TestUtilities.insertIngredientValues(mContext);
 
         Cursor ingredientCursor = mContext.getContentResolver().query(
                 IngredientEntry.CONTENT_URI,

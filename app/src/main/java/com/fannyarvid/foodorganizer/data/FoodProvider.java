@@ -8,11 +8,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 
 /**
  * Created by FannyArvid on 2015-04-24.
  */
 public class FoodProvider extends ContentProvider {
+
+    public static final String LOG_TAG = FoodProvider.class.getSimpleName();
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private FoodDbHelper mOpenHelper;
@@ -70,7 +73,7 @@ public class FoodProvider extends ContentProvider {
         uriMatcher.addURI(authority, FoodContract.PATH_BOX, BOX );
         uriMatcher.addURI(authority, FoodContract.PATH_INGREDIENT, INGREDIENT);
 
-        return null;
+        return uriMatcher;
     }
 
     @Override
@@ -103,10 +106,12 @@ public class FoodProvider extends ContentProvider {
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
             case FOOD_WITH_BOX: {
+                Log.i(LOG_TAG, "query switch: FOOD_WITH_BOX");
                 retCursor = getFoodByBox(uri, projection, sortOrder);
                 break;
             }
             case FOOD: {
+                Log.i(LOG_TAG, "query switch: FOOD");
                 retCursor = mOpenHelper.getReadableDatabase().query(
                         FoodContract.FoodEntry.TABLE_NAME,
                         projection,
@@ -119,6 +124,7 @@ public class FoodProvider extends ContentProvider {
                 break;
             }
             case BOX: {
+                Log.i(LOG_TAG, "query switch: BOX");
                 retCursor = mOpenHelper.getReadableDatabase().query(
                         FoodContract.BoxEntry.TABLE_NAME,
                         projection,
@@ -131,6 +137,7 @@ public class FoodProvider extends ContentProvider {
                 break;
             }
             case INGREDIENT: {
+                Log.i(LOG_TAG, "query switch: INGREDIENT");
                 retCursor = mOpenHelper.getReadableDatabase().query(
                         FoodContract.IngredientEntry.TABLE_NAME,
                         projection,
