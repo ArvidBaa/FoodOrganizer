@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <provider
-            android:authorities="com.fannyarvid.foodorganizer.app"
+            android:authorities="com.fannyarvid.foodorganizer"
             android:name="data.FoodProvider"/>
     </application>
 

@@ -47,6 +47,10 @@ public class FoodContract {
         public static long getBoxNoFromUri(Uri uri) {
             return Long.parseLong(uri.getPathSegments().get(0));
         }
+
+        public static Uri buildFoodWithBox(long boxNo) {
+            return CONTENT_URI.buildUpon().appendPath(Long.toString(boxNo)).build();
+        }
     }
 
     public static final class BoxEntry implements BaseColumns {

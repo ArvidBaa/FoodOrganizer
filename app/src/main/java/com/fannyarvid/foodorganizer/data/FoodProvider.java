@@ -86,7 +86,7 @@ public class FoodProvider extends ContentProvider {
 
         switch (match){
             case FOOD_WITH_BOX:
-                return FoodContract.FoodEntry.CONTENT_ITEM_TYPE;
+                return FoodContract.FoodEntry.CONTENT_TYPE;
             case FOOD:
                 return FoodContract.FoodEntry.CONTENT_TYPE;
             case BOX:
