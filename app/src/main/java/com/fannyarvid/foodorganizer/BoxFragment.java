@@ -7,16 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by FannyArvid on 2015-04-28.
  */
 public class BoxFragment extends Fragment {
 
-    private BoxAdapter mBoxAdapter;
+    private ArrayAdapter<String> mBoxAdapter;
+    // Use this code when leaving the dummy data
+    //private BoxAdapter mBoxAdapter;
     private ListView mListView;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -24,13 +31,41 @@ public class BoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mBoxAdapter = new BoxAdapter(getActivity(), null, 0);
+        // Dummy data for the ListView
+        String[] data = {
+                "Spaghetti",
+                "Svamspoppa",
+                "Pannkakor",
+                "Potatisgratäng",
+                "Tortellini",
+                "Lasagne",
+                "Tomatsoppa",
+                "Carbonara",
+                "Plättar",
+                "Tacos",
+                "Korvstroganoff",
+                "Lax",
+                "Kycklingwrap",
+                "Biffar",
+                "Köttfärssås",
+                "Risgrynsgröt"
+        };
+        List<String> boxNames = new ArrayList<String>(Arrays.asList(data));
+        mBoxAdapter =
+                new ArrayAdapter<String>(
+                        getActivity(),
+                        R.layout.list_item_box,
+                        R.id.list_item_name,
+                        boxNames
+                );
+
+        // Use the following code when leaving the dummy data
+        //mBoxAdapter = new BoxAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.fragment_box, container, false);
 
         mListView = (ListView) view.findViewById(R.id.listview_box);
         mListView.setAdapter(mBoxAdapter);
-
 
         return view;
     }

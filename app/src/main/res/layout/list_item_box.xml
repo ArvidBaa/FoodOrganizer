@@ -12,6 +12,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/white"/>
+        android:textColor="@color/black"/>
 
 </LinearLayout>
