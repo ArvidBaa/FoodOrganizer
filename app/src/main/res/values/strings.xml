@@ -2,11 +2,13 @@
     <string name="app_name">FoodOrganizer</string>
 
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Food boxes</string>
+    <string name="title_section2">Ingredients</string>
 
     <string name="hello_world">Hello world!</string>
 
     <string name="action_settings">Settings</string>
+    <string name="tab1">Boxes</string>
+    <string name="tab2">Ingredients</string>
+    <string name="title_activity_food">Food</string>
 </resources>
