@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FoodActivity"
+            android:label="@string/title_activity_food">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fannyarvid.foodorganizer.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

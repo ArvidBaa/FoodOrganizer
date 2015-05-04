@@ -1,12 +1,14 @@
 package com.fannyarvid.foodorganizer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
@@ -22,8 +24,8 @@ import java.util.List;
 public class BoxFragment extends Fragment {
 
     private ArrayAdapter<String> mBoxAdapter;
-    // Use this code when leaving the dummy data
-    //private BoxAdapter mBoxAdapter;
+    // TODO: Use this code when leaving the dummy data
+    // private BoxAdapter mBoxAdapter;
     private ListView mListView;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -66,6 +68,16 @@ public class BoxFragment extends Fragment {
 
         mListView = (ListView) view.findViewById(R.id.listview_box);
         mListView.setAdapter(mBoxAdapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String box = mBoxAdapter.getItem(position);
+                Intent intent = new Intent(getActivity(), FoodActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, box);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -84,7 +96,9 @@ public class BoxFragment extends Fragment {
         private static final int VIEW_TYPE_BOX = 1;
         private static final int VIEW_TYPE_COUNT = 2;
 
-        public BoxAdapter(Context context, Cursor cursor, int flags) { super(context, cursor, flags);}
+        public BoxAdapter(Context context, Cursor cursor, int flags) {
+            super(context, cursor, flags);
+        }
 
         @Override
         public int getItemViewType(int position) {
@@ -104,7 +118,7 @@ public class BoxFragment extends Fragment {
                 case VIEW_TYPE_ADD_BOX: {
                     // TODO: Add code to find the layout id for the "add box" button layout
 
-                    // Following layout is just for now
+                    // Following layout is temporary until above is finished
                     layoutId = R.layout.list_item_box;
 
                     break;
@@ -128,7 +142,7 @@ public class BoxFragment extends Fragment {
                     // TODO: Add code to build the "add box" button layout
                     viewHolder
                             .nameView
-                            .setText("Test"
+                            .setText("Test add box"
                             );
                     break;
                 }
@@ -137,7 +151,7 @@ public class BoxFragment extends Fragment {
                     // String name = cursor.getString()
                     viewHolder
                             .nameView
-                            .setText("Test"
+                            .setText("Test box"
                             );
                     break;
                 }

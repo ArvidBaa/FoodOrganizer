@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:minHeight="?android:attr/listPreferredItemHeight">
 
     <TextView
-        android:id="@+id/food_text"
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
+        android:id="@+id/list_item_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/black"/>
 
-    <ListView
-        android:id="@+id/listview_food"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</FrameLayout>
+</LinearLayout>
