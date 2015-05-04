@@ -11,4 +11,6 @@
     <string name="tab1">Boxes</string>
     <string name="tab2">Ingredients</string>
     <string name="title_activity_food">Food</string>
+    <string name="add_box">Add new box</string>
+    <string name="add_ingredient">Add new ingredient</string>
 </resources>

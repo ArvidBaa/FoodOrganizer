@@ -75,69 +75,21 @@ public class IngredientFragment extends Fragment {
 
     public static class IngredientAdapter extends CursorAdapter {
 
-        private static final int VIEW_TYPE_ADD_INGREDIENT = 0;
-        private static final int VIEW_TYPE_INGREDIENT = 1;
-        private static final int VIEW_TYPE_COUNT = 2;
-
         public IngredientAdapter(Context context, Cursor cursor, int flags) {
             super(context, cursor, flags);
         }
 
         @Override
-        public int getItemViewType(int position) {
-            return (position == 0) ? VIEW_TYPE_ADD_INGREDIENT : VIEW_TYPE_INGREDIENT;
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return VIEW_TYPE_COUNT;
-        }
-
-        @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            int viewType = getItemViewType(cursor.getPosition());
-            int layoutId = -1;
-            switch (viewType) {
-                case VIEW_TYPE_ADD_INGREDIENT: {
-                    // TODO: Add code to find the layour id for the "add ingredient" button layout
-
-
-                    // Following layout is temporary until above is finished
-                    layoutId = R.layout.list_item_ingredient;
-
-                    break;
-                }
-                case VIEW_TYPE_INGREDIENT: {
-                    layoutId = R.layout.list_item_ingredient;
-                    break;
-                }
-            }
-            return  LayoutInflater.from(context).inflate(layoutId, parent, false);
+            return LayoutInflater.from(context).inflate(R.layout.list_item_ingredient, parent, false);
         }
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
+
+            // TODO: Add data from cursor instead of dummy data
             IngredientViewHolder viewHolder = (IngredientViewHolder) view.getTag();
-            int viewType = getItemViewType(cursor.getPosition());
-            switch (viewType) {
-                case VIEW_TYPE_ADD_INGREDIENT: {
-                    // TODO: Add code to build the "add ingredient button layout
-                    viewHolder
-                            .nameView
-                            .setText("Test add ingredient"
-                            );
-                    break;
-                }
-                case VIEW_TYPE_INGREDIENT: {
-                    // TODO: Add code to get ingredient name from cursor after implementing database
-                    // String name = cursor.getString()
-                    viewHolder
-                            .nameView
-                            .setText("Test ingredient"
-                            );
-                    break;
-                }
-            }
+            viewHolder.nameView.setText("Test ingredient");
         }
 
         public static class IngredientViewHolder {
