@@ -64,7 +64,7 @@ public class FoodContract {
 
         public static final String TABLE_NAME = "box";
 
-        public static final String COLUMN_FOOD_NAME = "food_name";
+        public static final String COLUMN_BOX_NAME = "food_name";
 
         public static final String COLUMN_DATE = "date";
 
@@ -74,6 +74,10 @@ public class FoodContract {
 
         public static Uri buildBoxUri (long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildAllBoxUri() {
+            return CONTENT_URI;
         }
     }
 
@@ -95,6 +99,10 @@ public class FoodContract {
 
         public static Uri buildIngredientUri (long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildAllIngredientUri() {
+            return CONTENT_URI;
         }
     }
 }
