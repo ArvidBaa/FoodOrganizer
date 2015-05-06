@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.fannyarvid.foodorganizer.data.FoodContract.BoxEntry;
-import com.fannyarvid.foodorganizer.data.FoodContract.IngredientEntry;
 import com.fannyarvid.foodorganizer.data.FoodContract.FoodEntry;
+import com.fannyarvid.foodorganizer.data.FoodContract.IngredientEntry;
 
 /**
  * Created by FannyArvid on 2015-04-24.
@@ -34,9 +34,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_BOX_TABLE);
         db.execSQL(SQL_CREATE_INGREDIENT_TABLE);
         db.execSQL(SQL_CREATE_LINK_TABLE);
-
     }
-
 
     private String createLinkTableString() {
         return "CREATE TABLE " +
@@ -58,8 +56,8 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 IngredientEntry.TABLE_NAME + " (" +
                 IngredientEntry._ID + " INTEGER PRIMARY KEY, " +
                 IngredientEntry.COLUMN_INGREDIENT_NAME + " TEXT NOT NULL, " +
-                IngredientEntry.COLUMN_STORAGE_TIME_FREEZER + " INTEGER NOT NULL, " +
-                IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE + " INTEGER NOT NULL " +
+                IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE + " INTEGER NOT NULL, " +
+                IngredientEntry.COLUMN_STORAGE_TIME_FREEZER + " INTEGER NOT NULL " +
                 " );";
     }
 
