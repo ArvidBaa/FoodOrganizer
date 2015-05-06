@@ -25,24 +25,21 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_BOX_TABLE = "CREATE TABLE " +
-                BoxEntry.TABLE_NAME + " (" +
-                BoxEntry._ID + " INTEGER PRIMARY KEY, " +
-                BoxEntry.COLUMN_FOOD_NAME + " TEXT NOT NULL, " +
-                BoxEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
-                BoxEntry.COLUMN_STORAGE_TYPE + " INTEGER NOT NULL, " +
-                BoxEntry.COLUMN_HAS_BEEN_IN_FREEZER + " INTEGER NOT NULL " +
-                " );";
+        final String SQL_CREATE_BOX_TABLE = createBoxTableString();
 
-        final String SQL_CREATE_INGREDIENT_TABLE = "CREATE TABLE " +
-                IngredientEntry.TABLE_NAME + " (" +
-                IngredientEntry._ID + " INTEGER PRIMARY KEY, " +
-                IngredientEntry.COLUMN_INGREDIENT_NAME + " TEXT NOT NULL, " +
-                IngredientEntry.COLUMN_STORAGE_TIME_FREEZER + " INTEGER NOT NULL, " +
-                IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE + " INTEGER NOT NULL " +
-                " );";
+        final String SQL_CREATE_INGREDIENT_TABLE = createIngredientTableString();
 
-        final String SQL_CREATE_LINK_TABLE = "CREATE TABLE " +
+        final String SQL_CREATE_LINK_TABLE = createLinkTableString();
+
+        db.execSQL(SQL_CREATE_BOX_TABLE);
+        db.execSQL(SQL_CREATE_INGREDIENT_TABLE);
+        db.execSQL(SQL_CREATE_LINK_TABLE);
+
+    }
+
+
+    private String createLinkTableString() {
+        return "CREATE TABLE " +
                 FoodEntry.TABLE_NAME + " (" +
                 FoodEntry._ID + " INTEGER PRIMARY KEY, " +
                 FoodEntry.COLUMN_BOX_KEY + " INTEGER NOT NULL, " +
@@ -52,11 +49,29 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 BoxEntry.TABLE_NAME + " (" + BoxEntry._ID + "), " +
 
                 " FOREIGN KEY (" + FoodEntry.COLUMN_INGREDIENT_KEY + ") REFERENCES " +
-                IngredientEntry.TABLE_NAME + " (" + IngredientEntry._ID + "));";
+                IngredientEntry.TABLE_NAME + " (" + IngredientEntry._ID +
+                "));";
+    }
 
-        db.execSQL(SQL_CREATE_BOX_TABLE);
-        db.execSQL(SQL_CREATE_INGREDIENT_TABLE);
-        db.execSQL(SQL_CREATE_LINK_TABLE);
+    private String createIngredientTableString() {
+        return "CREATE TABLE " +
+                IngredientEntry.TABLE_NAME + " (" +
+                IngredientEntry._ID + " INTEGER PRIMARY KEY, " +
+                IngredientEntry.COLUMN_INGREDIENT_NAME + " TEXT NOT NULL, " +
+                IngredientEntry.COLUMN_STORAGE_TIME_FREEZER + " INTEGER NOT NULL, " +
+                IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE + " INTEGER NOT NULL " +
+                " );";
+    }
+
+    private String createBoxTableString() {
+        return "CREATE TABLE " +
+                BoxEntry.TABLE_NAME + " (" +
+                BoxEntry._ID + " INTEGER PRIMARY KEY, " +
+                BoxEntry.COLUMN_BOX_NAME + " TEXT NOT NULL, " +
+                BoxEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
+                BoxEntry.COLUMN_STORAGE_TYPE + " INTEGER NOT NULL, " +
+                BoxEntry.COLUMN_HAS_BEEN_IN_FREEZER + " INTEGER NOT NULL " +
+                " );";
     }
 
     @Override
