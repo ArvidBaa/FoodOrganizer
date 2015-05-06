@@ -64,7 +64,7 @@ public class IngredientFragment extends Fragment {
                 null,
                 null,
                 null
-        );;
+        );
         mIngredientAdapter = new IngredientAdapter(getActivity(), cur, 0);
 
         View view = inflater.inflate(R.layout.fragment_ingredient, container, false);

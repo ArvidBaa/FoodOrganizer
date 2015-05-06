@@ -21,7 +21,7 @@ public class TestProvider extends AndroidTestCase {
     public static final String LOG_TAG = TestProvider.class.getSimpleName();
 
     public void deleteAllRecordsFromProvider() {
-        mContext.getContentResolver() .delete(
+        mContext.getContentResolver().delete(
                 FoodEntry.CONTENT_URI,
                 null,
                 null
