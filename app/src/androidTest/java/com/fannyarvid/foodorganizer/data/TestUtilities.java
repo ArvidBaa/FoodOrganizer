@@ -50,7 +50,7 @@ public class TestUtilities extends AndroidTestCase {
     static ContentValues createBoxValues() {
         ContentValues boxValues = new ContentValues();
         boxValues.put(FoodContract.BoxEntry.COLUMN_DATE, TEST_DATE);
-        boxValues.put(FoodContract.BoxEntry.COLUMN_FOOD_NAME, "Bröd");
+        boxValues.put(FoodContract.BoxEntry.COLUMN_BOX_NAME, "Bröd");
         boxValues.put(FoodContract.BoxEntry.COLUMN_STORAGE_TYPE, 0);
         boxValues.put(FoodContract.BoxEntry.COLUMN_HAS_BEEN_IN_FREEZER, 0);
         return boxValues;
