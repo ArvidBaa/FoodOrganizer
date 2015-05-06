@@ -23,6 +23,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fannyarvid.foodorganizer.MainActivity"/>
         </activity>
+        <provider
+            android:authorities="com.fannyarvid.foodorganizer"
+            android:name=".data.FoodProvider"/>
     </application>
 
 </manifest>
