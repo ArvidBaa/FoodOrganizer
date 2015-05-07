@@ -16,7 +16,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
 
-    static final String DATABASE_NAME = "food.db";
+    private static final String DATABASE_NAME = "food.db";
 
     public FoodDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,16 +29,14 @@ public class FoodDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_INGREDIENT_TABLE = createIngredientTableString();
 
-        final String SQL_CREATE_LINK_TABLE = createLinkTableString();
+        final String SQL_CREATE_FOOD_TABLE = createFoodTableString();
 
         db.execSQL(SQL_CREATE_BOX_TABLE);
         db.execSQL(SQL_CREATE_INGREDIENT_TABLE);
-        db.execSQL(SQL_CREATE_LINK_TABLE);
-
+        db.execSQL(SQL_CREATE_FOOD_TABLE);
     }
 
-
-    private String createLinkTableString() {
+    private String createFoodTableString() {
         return "CREATE TABLE " +
                 FoodEntry.TABLE_NAME + " (" +
                 FoodEntry._ID + " INTEGER PRIMARY KEY, " +
@@ -58,8 +56,9 @@ public class FoodDbHelper extends SQLiteOpenHelper {
                 IngredientEntry.TABLE_NAME + " (" +
                 IngredientEntry._ID + " INTEGER PRIMARY KEY, " +
                 IngredientEntry.COLUMN_INGREDIENT_NAME + " TEXT NOT NULL, " +
+                IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE + " INTEGER NOT NULL, " +
                 IngredientEntry.COLUMN_STORAGE_TIME_FREEZER + " INTEGER NOT NULL, " +
-                IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE + " INTEGER NOT NULL " +
+                IngredientEntry.COLUMN_IS_INITIAL_INGREDIENT + " INTEGER NOT NULL" +
                 " );";
     }
 
