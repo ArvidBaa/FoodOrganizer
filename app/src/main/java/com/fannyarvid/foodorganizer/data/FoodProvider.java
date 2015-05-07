@@ -79,6 +79,8 @@ public class FoodProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         mOpenHelper = new FoodDbHelper(getContext());
+        Log.d(LOG_TAG, "directory:" + getContext().getApplicationInfo().dataDir);
+
         return true;
     }
 
