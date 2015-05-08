@@ -18,6 +18,8 @@ import com.fannyarvid.foodorganizer.data.FoodContract;
  */
 public class AddIngredientDialogFragment extends DialogFragment {
 
+    private static final String LOG_TAG = AddIngredientDialogFragment.class.getSimpleName();
+
     public interface AddIngredientDialogListener {
         public void onAddIngredientDialogPositiveClick(ContentValues values);
     }
@@ -53,6 +55,8 @@ public class AddIngredientDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        // TODO: Fix error if any of the times are ""
                         String ingredientName = mIngredientName.getText().toString();
                         int fridgeTime = Integer.valueOf(mFridgeTime.getText().toString());
                         int freezerTime = Integer.valueOf(mFreezerTime.getText().toString());

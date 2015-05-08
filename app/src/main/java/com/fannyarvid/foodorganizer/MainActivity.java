@@ -12,7 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import com.fannyarvid.foodorganizer.data.FoodContract;
 
 import java.util.Locale;
 
@@ -76,8 +77,8 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onAddIngredientDialogPositiveClick(ContentValues values) {
-        // TODO: Change this to what should actually happen when adding an ingredient
-        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+        // TODO: Make sure the listView updates after adding a new ingredient
+        getContentResolver().insert(FoodContract.IngredientEntry.CONTENT_URI, values);
     }
 
     /**
