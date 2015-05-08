@@ -2,16 +2,18 @@ package com.fannyarvid.foodorganizer.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.fannyarvid.foodorganizer.data.FoodContract.BoxEntry;
-import com.fannyarvid.foodorganizer.data.FoodContract.IngredientEntry;
 import com.fannyarvid.foodorganizer.data.FoodContract.FoodEntry;
+import com.fannyarvid.foodorganizer.data.FoodContract.IngredientEntry;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 /**
  * Created by FannyArvid on 2015-04-24.
  */
-public class FoodDbHelper extends SQLiteOpenHelper {
+public class FoodDbHelper extends SQLiteAssetHelper {
+
+    private static final String LOG_TAG = FoodDbHelper.class.getSimpleName();
 
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
@@ -22,7 +24,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
+    /*
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_BOX_TABLE = createBoxTableString();
@@ -35,6 +37,7 @@ public class FoodDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_INGREDIENT_TABLE);
         db.execSQL(SQL_CREATE_FOOD_TABLE);
     }
+    */
 
     private String createFoodTableString() {
         return "CREATE TABLE " +

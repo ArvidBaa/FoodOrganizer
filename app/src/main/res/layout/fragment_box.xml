@@ -7,15 +7,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:text="@string/add_box"
+            android:drawableRight="@drawable/actions_list_add_icon_48"/>
+
+        <ListView
+            android:id="@+id/listview_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:divider="@null"/>
         </LinearLayout>
 
-    <ListView
-        android:id="@+id/listview_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:choiceMode="singleChoice"
-        android:divider="@null"/>
 
 </FrameLayout>

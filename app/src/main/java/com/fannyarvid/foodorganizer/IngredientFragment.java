@@ -2,28 +2,26 @@ package com.fannyarvid.foodorganizer;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.fannyarvid.foodorganizer.data.FoodContract;
 
 /**
  * Created by FannyArvid on 2015-04-28.
  */
 public class IngredientFragment extends Fragment {
 
-    private ArrayAdapter<String> mIngredientAdapter;
+    // private ArrayAdapter<String> mIngredientAdapter;
     // TODO: Use this code when leaving the dummy data
-    // private IngredientAdapter mIngredientAdapter;
+    private IngredientAdapter mIngredientAdapter;
     private ListView mListView;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
@@ -31,6 +29,7 @@ public class IngredientFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        /*
         // Dummy data for the ListView
         String[] data = {
                 "Mjöl",
@@ -56,6 +55,17 @@ public class IngredientFragment extends Fragment {
                         R.id.list_item_name,
                         ingredientNames
                 );
+        */
+
+        Uri allIngredientUri = FoodContract.IngredientEntry.buildAllIngredientUri();
+        Cursor cur = getActivity().getContentResolver().query(
+                allIngredientUri,
+                null,
+                null,
+                null,
+                null
+        );
+        mIngredientAdapter = new IngredientAdapter(getActivity(), cur, 0);
 
         View view = inflater.inflate(R.layout.fragment_ingredient, container, false);
 
@@ -75,76 +85,35 @@ public class IngredientFragment extends Fragment {
 
     public static class IngredientAdapter extends CursorAdapter {
 
-        private static final int VIEW_TYPE_ADD_INGREDIENT = 0;
-        private static final int VIEW_TYPE_INGREDIENT = 1;
-        private static final int VIEW_TYPE_COUNT = 2;
+        private static final String LOG_TAG = IngredientAdapter.class.getSimpleName();
 
         public IngredientAdapter(Context context, Cursor cursor, int flags) {
             super(context, cursor, flags);
         }
 
         @Override
-        public int getItemViewType(int position) {
-            return (position == 0) ? VIEW_TYPE_ADD_INGREDIENT : VIEW_TYPE_INGREDIENT;
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return VIEW_TYPE_COUNT;
-        }
-
-        @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            int viewType = getItemViewType(cursor.getPosition());
-            int layoutId = -1;
-            switch (viewType) {
-                case VIEW_TYPE_ADD_INGREDIENT: {
-                    // TODO: Add code to find the layour id for the "add ingredient" button layout
-
-
-                    // Following layout is temporary until above is finished
-                    layoutId = R.layout.list_item_ingredient;
-
-                    break;
-                }
-                case VIEW_TYPE_INGREDIENT: {
-                    layoutId = R.layout.list_item_ingredient;
-                    break;
-                }
-            }
-            return  LayoutInflater.from(context).inflate(layoutId, parent, false);
+            return LayoutInflater.from(context).inflate(R.layout.list_item_ingredient, parent, false);
         }
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            IngredientViewHolder viewHolder = (IngredientViewHolder) view.getTag();
-            int viewType = getItemViewType(cursor.getPosition());
-            switch (viewType) {
-                case VIEW_TYPE_ADD_INGREDIENT: {
-                    // TODO: Add code to build the "add ingredient button layout
-                    viewHolder
-                            .nameView
-                            .setText("Test add ingredient"
-                            );
-                    break;
-                }
-                case VIEW_TYPE_INGREDIENT: {
-                    // TODO: Add code to get ingredient name from cursor after implementing database
-                    // String name = cursor.getString()
-                    viewHolder
-                            .nameView
-                            .setText("Test ingredient"
-                            );
-                    break;
-                }
-            }
+
+            // TODO: Add data from cursor instead of dummy data
+            //IngredientViewHolder viewHolder = (IngredientViewHolder) view.getTag();
+            //viewHolder.nameView.setText("Test ingredient");
+
+            TextView textView = (TextView) view.findViewById(R.id.ingredient_list_item_name);
+            int idx_ingredient_name = cursor.getColumnIndex(FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME);
+            String ingredientNameStr = cursor.getString(idx_ingredient_name);
+            textView.setText(ingredientNameStr);
         }
 
         public static class IngredientViewHolder {
             public final TextView nameView;
 
             public IngredientViewHolder(View view) {
-                nameView = (TextView) view.findViewById(R.id.list_item_name);
+                nameView = (TextView) view.findViewById(R.id.ingredient_list_item_name);
             }
         }
     }
