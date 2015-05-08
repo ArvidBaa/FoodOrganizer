@@ -19,8 +19,6 @@ import com.fannyarvid.foodorganizer.data.FoodContract;
  */
 public class IngredientFragment extends Fragment {
 
-    // private ArrayAdapter<String> mIngredientAdapter;
-    // TODO: Use this code when leaving the dummy data
     private IngredientAdapter mIngredientAdapter;
     private ListView mListView;
 
@@ -28,34 +26,6 @@ public class IngredientFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        /*
-        // Dummy data for the ListView
-        String[] data = {
-                "Mjöl",
-                "Smör",
-                "Mjölk",
-                "Kyckling - rå",
-                "Kyckling - stekt",
-                "Kyckling - kokt",
-                "Grädde",
-                "Ärtor",
-                "Svamp",
-                "Korv",
-                "Ägg - rå",
-                "Ägg - stekt",
-                "Ägg - kokt",
-                "Broccoli"
-        };
-        List<String> ingredientNames = new ArrayList<String>(Arrays.asList(data));
-        mIngredientAdapter =
-                new ArrayAdapter<String>(
-                        getActivity(),
-                        R.layout.list_item_ingredient,
-                        R.id.list_item_name,
-                        ingredientNames
-                );
-        */
 
         Uri allIngredientUri = FoodContract.IngredientEntry.buildAllIngredientUri();
         Cursor cur = getActivity().getContentResolver().query(
@@ -99,7 +69,7 @@ public class IngredientFragment extends Fragment {
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
 
-            // TODO: Add data from cursor instead of dummy data
+            // TODO: Use the viewHolder class?
             //IngredientViewHolder viewHolder = (IngredientViewHolder) view.getTag();
             //viewHolder.nameView.setText("Test ingredient");
 

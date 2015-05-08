@@ -19,10 +19,6 @@ import com.fannyarvid.foodorganizer.data.FoodContract;
  */
 public class BoxFragment extends Fragment {
 
-
-
-    //private ArrayAdapter<String> mBoxAdapter;
-    // TODO: Use this code when leaving the dummy data
     private BoxAdapter mBoxAdapter;
     private ListView mListView;
 
@@ -31,37 +27,6 @@ public class BoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        /*
-        // Dummy data for the ListView
-        String[] data = {
-                "Spaghetti",
-                "Svamspoppa",
-                "Pannkakor",
-                "Potatisgratäng",
-                "Tortellini",
-                "Lasagne",
-                "Tomatsoppa",
-                "Carbonara",
-                "Plättar",
-                "Tacos",
-                "Korvstroganoff",
-                "Lax",
-                "Kycklingwrap",
-                "Biffar",
-                "Köttfärssås",
-                "Risgrynsgröt"
-        };
-        List<String> boxNames = new ArrayList<String>(Arrays.asList(data));
-        mBoxAdapter =
-                new ArrayAdapter<String>(
-                        getActivity(),
-                        R.layout.list_item_box,
-                        R.id.list_item_name,
-                        boxNames
-                );
-        */
-
-        // Use the following code when leaving the dummy data
         Uri allBoxUri = FoodContract.BoxEntry.buildAllBoxUri();
         Cursor cur = getActivity().getContentResolver().query(
                 allBoxUri,
@@ -76,6 +41,7 @@ public class BoxFragment extends Fragment {
 
         mListView = (ListView) view.findViewById(R.id.listview_box);
         mListView.setAdapter(mBoxAdapter);
+        // TODO: Code below should make a detail view of a "box" appear when clicking on a box item in the listView
         /*
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -116,7 +82,7 @@ public class BoxFragment extends Fragment {
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
 
-            // TODO: Add data from cursor instead of dummy data
+            // TODO: Use the viewHolder class?
             // BoxListViewHolder viewHolder = (BoxListViewHolder) view.getTag();
             // viewHolder.nameView.setText("Test box");
 

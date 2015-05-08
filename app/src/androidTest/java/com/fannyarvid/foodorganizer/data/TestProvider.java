@@ -93,7 +93,7 @@ public class TestProvider extends AndroidTestCase {
     public void testGetType() {
         String type = mContext.getContentResolver().getType(FoodEntry.CONTENT_URI);
 
-        assertEquals("Error: the FoodEntry CONTENT_UTI should return FoodEntry.CONTENT_TYPE",
+        assertEquals("Error: the FoodEntry CONTENT_URI should return FoodEntry.CONTENT_TYPE",
                 FoodEntry.CONTENT_TYPE, type);
 
         long testBoxNo = 1;
@@ -101,17 +101,17 @@ public class TestProvider extends AndroidTestCase {
         type = mContext.getContentResolver().getType(
                 FoodEntry.buildFoodWithBox(testBoxNo));
 
-        assertEquals("The FoodEntry CONTENT _URI with boxNo should return FoodEntry.CONTENT_TYPE",
+        assertEquals("Error: The FoodEntry CONTENT_URI with boxNo should return FoodEntry.CONTENT_TYPE",
                 FoodEntry.CONTENT_TYPE, type);
 
         type = mContext.getContentResolver().getType(BoxEntry.CONTENT_URI);
 
-        assertEquals("The BoxEntry CONTENT _URI should return BoxEntry.CONTENT_TYPE",
+        assertEquals("Error: The BoxEntry CONTENT_URI should return BoxEntry.CONTENT_TYPE",
                 BoxEntry.CONTENT_TYPE, type);
 
         type = mContext.getContentResolver().getType(IngredientEntry.CONTENT_URI);
 
-        assertEquals("The BoxEntry CONTENT _URI should return IngredientEntry.CONTENT_TYPE",
+        assertEquals("Error_ The IngredientEntry CONTENT_URI should return IngredientEntry.CONTENT_TYPE",
                 IngredientEntry.CONTENT_TYPE, type);
     }
 
