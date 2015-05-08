@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,8 +24,10 @@ public class IngredientFragment extends Fragment {
     // TODO: Use this code when leaving the dummy data
     private IngredientAdapter mIngredientAdapter;
     private ListView mListView;
+    private Button mButton;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +74,13 @@ public class IngredientFragment extends Fragment {
 
         mListView = (ListView) view.findViewById(R.id.listview_ingredient);
         mListView.setAdapter(mIngredientAdapter);
+
+        mButton = (Button) view.findViewById(R.id.button_add_ingredient);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+            }
+        });
 
         return view;
     }
