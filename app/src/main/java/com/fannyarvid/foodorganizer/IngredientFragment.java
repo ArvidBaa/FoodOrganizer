@@ -78,7 +78,8 @@ public class IngredientFragment extends Fragment {
         mButton = (Button) view.findViewById(R.id.button_add_ingredient);
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                AddIngredientDialogFragment dialog = new AddIngredientDialogFragment();
+                dialog.show(getActivity().getFragmentManager(), "AddIngredientDialogFragment");
             }
         });
 

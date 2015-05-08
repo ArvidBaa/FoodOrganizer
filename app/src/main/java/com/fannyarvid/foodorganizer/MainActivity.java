@@ -1,5 +1,6 @@
 package com.fannyarvid.foodorganizer;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,11 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+        implements AddIngredientDialogFragment.AddIngredientDialogListener {
 
     public static final int NUM_PAGES = 2;
 
@@ -71,6 +74,11 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onAddIngredientDialogPositiveClick(ContentValues values) {
+        // TODO: Change this to what should actually happen when adding an ingredient
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
