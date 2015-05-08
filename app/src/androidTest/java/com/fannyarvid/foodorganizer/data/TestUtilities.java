@@ -61,6 +61,7 @@ public class TestUtilities extends AndroidTestCase {
         ingredientValues.put(FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME, "Mjöl");
         ingredientValues.put(FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FREEZER, 10);
         ingredientValues.put(FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE, 5);
+        ingredientValues.put(FoodContract.IngredientEntry.COLUMN_IS_INITIAL_INGREDIENT, 1);
         return ingredientValues;
     }
 

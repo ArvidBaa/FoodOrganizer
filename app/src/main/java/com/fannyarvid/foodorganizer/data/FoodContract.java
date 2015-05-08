@@ -64,7 +64,7 @@ public class FoodContract {
 
         public static final String TABLE_NAME = "box";
 
-        public static final String COLUMN_BOX_NAME = "food_name";
+        public static final String COLUMN_BOX_NAME = "box_name";
 
         public static final String COLUMN_DATE = "date";
 

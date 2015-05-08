@@ -102,6 +102,8 @@ public class BoxFragment extends Fragment {
 
     public static class BoxAdapter extends CursorAdapter {
 
+        private static final String LOG_TAG = BoxAdapter.class.getSimpleName();
+
         public BoxAdapter(Context context, Cursor cursor, int flags) {
             super(context, cursor, flags);
         }
@@ -118,7 +120,7 @@ public class BoxFragment extends Fragment {
             // BoxListViewHolder viewHolder = (BoxListViewHolder) view.getTag();
             // viewHolder.nameView.setText("Test box");
             
-            TextView textView = (TextView) view.findViewById(R.id.list_item_name);
+            TextView textView = (TextView) view.findViewById(R.id.box_list_item_name);
             int idx_box_name = cursor.getColumnIndex(FoodContract.BoxEntry.COLUMN_BOX_NAME);
             String boxNameStr = cursor.getString(idx_box_name);
             textView.setText(boxNameStr);
@@ -128,7 +130,7 @@ public class BoxFragment extends Fragment {
             public final TextView nameView;
 
             public BoxListViewHolder(View view) {
-                nameView = (TextView) view.findViewById(R.id.list_item_name);
+                nameView = (TextView) view.findViewById(R.id.box_list_item_name);
             }
         }
     }
