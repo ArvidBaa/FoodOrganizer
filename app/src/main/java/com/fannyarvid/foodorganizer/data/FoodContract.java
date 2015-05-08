@@ -17,7 +17,7 @@ public class FoodContract {
 
     public static final String PATH_BOX = "box";
     public static final String PATH_INGREDIENT = "ingredient";
-    public static final String PATH_FOOD = "link";
+    public static final String PATH_FOOD = "food";
 
     public static long normalizeDate(long startDate) {
         Time time = new Time();
@@ -64,7 +64,7 @@ public class FoodContract {
 
         public static final String TABLE_NAME = "box";
 
-        public static final String COLUMN_BOX_NAME = "food_name";
+        public static final String COLUMN_BOX_NAME = "box_name";
 
         public static final String COLUMN_DATE = "date";
 
@@ -96,6 +96,8 @@ public class FoodContract {
 
         public static final String COLUMN_STORAGE_TIME_FRIDGE = "storage_time_fridge";
         public static final String COLUMN_STORAGE_TIME_FREEZER = "storage_time_freezer";
+
+        public static final String COLUMN_IS_INITIAL_INGREDIENT = "is_initial_ingredient";
 
         public static Uri buildIngredientUri (long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

@@ -85,6 +85,8 @@ public class IngredientFragment extends Fragment {
 
     public static class IngredientAdapter extends CursorAdapter {
 
+        private static final String LOG_TAG = IngredientAdapter.class.getSimpleName();
+
         public IngredientAdapter(Context context, Cursor cursor, int flags) {
             super(context, cursor, flags);
         }
@@ -101,7 +103,7 @@ public class IngredientFragment extends Fragment {
             //IngredientViewHolder viewHolder = (IngredientViewHolder) view.getTag();
             //viewHolder.nameView.setText("Test ingredient");
 
-            TextView textView = (TextView) view.findViewById(R.id.list_item_name);
+            TextView textView = (TextView) view.findViewById(R.id.ingredient_list_item_name);
             int idx_ingredient_name = cursor.getColumnIndex(FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME);
             String ingredientNameStr = cursor.getString(idx_ingredient_name);
             textView.setText(ingredientNameStr);
@@ -111,7 +113,7 @@ public class IngredientFragment extends Fragment {
             public final TextView nameView;
 
             public IngredientViewHolder(View view) {
-                nameView = (TextView) view.findViewById(R.id.list_item_name);
+                nameView = (TextView) view.findViewById(R.id.ingredient_list_item_name);
             }
         }
     }

@@ -21,6 +21,17 @@ public class TestProvider extends AndroidTestCase {
     public static final String LOG_TAG = TestProvider.class.getSimpleName();
 
     public void deleteAllRecordsFromProvider() {
+        /*
+        Cursor cursor = mContext.getContentResolver().query(
+                IngredientEntry.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+        );
+        assertEquals("Error: Initial records not inserted to Ingredient table", 3, cursor.getCount());
+        */
+
         mContext.getContentResolver().delete(
                 FoodEntry.CONTENT_URI,
                 null,
