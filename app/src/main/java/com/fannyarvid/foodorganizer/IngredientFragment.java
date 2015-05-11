@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +21,24 @@ import com.fannyarvid.foodorganizer.data.FoodContract;
 /**
  * Created by FannyArvid on 2015-04-28.
  */
-public class IngredientFragment extends Fragment {
+public class IngredientFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    // private ArrayAdapter<String> mIngredientAdapter;
-    // TODO: Use this code when leaving the dummy data
+    private static final int INGREDIENT_LOADER = 0;
+
+    private static final String[] INGREDIENT_COLUMNS = {
+            FoodContract.IngredientEntry.TABLE_NAME + "." + FoodContract.IngredientEntry._ID,
+            FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME,
+            FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE,
+            FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FREEZER,
+            FoodContract.IngredientEntry.COLUMN_IS_INITIAL_INGREDIENT
+    };
+
+    static final int COL_INGREDIENT_ID = 0;
+    static final int COL_INGREDIENT_NAME = 1;
+    static final int COL_STORAGE_TIME_FRIDGE = 2;
+    static final int COL_STORAGE_TIME_FREEZER = 3;
+    static final int COL_IS_INITIAL_INGREDIENT = 4;
+
     private IngredientAdapter mIngredientAdapter;
     private ListView mListView;
     private Button mButton;
@@ -32,43 +49,7 @@ public class IngredientFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        /*
-        // Dummy data for the ListView
-        String[] data = {
-                "Mjöl",
-                "Smör",
-                "Mjölk",
-                "Kyckling - rå",
-                "Kyckling - stekt",
-                "Kyckling - kokt",
-                "Grädde",
-                "Ärtor",
-                "Svamp",
-                "Korv",
-                "Ägg - rå",
-                "Ägg - stekt",
-                "Ägg - kokt",
-                "Broccoli"
-        };
-        List<String> ingredientNames = new ArrayList<String>(Arrays.asList(data));
-        mIngredientAdapter =
-                new ArrayAdapter<String>(
-                        getActivity(),
-                        R.layout.list_item_ingredient,
-                        R.id.list_item_name,
-                        ingredientNames
-                );
-        */
-
-        Uri allIngredientUri = FoodContract.IngredientEntry.buildAllIngredientUri();
-        Cursor cur = getActivity().getContentResolver().query(
-                allIngredientUri,
-                null,
-                null,
-                null,
-                null
-        );
-        mIngredientAdapter = new IngredientAdapter(getActivity(), cur, 0);
+        mIngredientAdapter = new IngredientAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.fragment_ingredient, container, false);
 
@@ -86,12 +67,41 @@ public class IngredientFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(INGREDIENT_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
     public static IngredientFragment newInstance(int sectionNumber) {
         IngredientFragment fragment = new IngredientFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Uri allIngredientUri = FoodContract.IngredientEntry.buildAllIngredientUri();
+
+        return new CursorLoader(getActivity(),
+                allIngredientUri,
+                INGREDIENT_COLUMNS,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mIngredientAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mIngredientAdapter.swapCursor(null);
     }
 
     public static class IngredientAdapter extends CursorAdapter {
@@ -115,8 +125,7 @@ public class IngredientFragment extends Fragment {
             //viewHolder.nameView.setText("Test ingredient");
 
             TextView textView = (TextView) view.findViewById(R.id.ingredient_list_item_name);
-            int idx_ingredient_name = cursor.getColumnIndex(FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME);
-            String ingredientNameStr = cursor.getString(idx_ingredient_name);
+            String ingredientNameStr = cursor.getString(COL_INGREDIENT_NAME);
             textView.setText(ingredientNameStr);
         }
 
