@@ -33,16 +33,16 @@ public class FoodProvider extends ContentProvider {
 
         sFoodByBoxQueryBuilder.setTables(
                 FoodContract.FoodEntry.TABLE_NAME + " INNER JOIN " +
-                        FoodContract.BoxEntry.TABLE_NAME +
-                        " ON " + FoodContract.FoodEntry.TABLE_NAME +
-                        "." + FoodContract.FoodEntry.COLUMN_BOX_KEY +
-                        " = " + FoodContract.BoxEntry.TABLE_NAME +
-                        "." + FoodContract.BoxEntry._ID + " INNER JOIN " +
-                        FoodContract.IngredientEntry.TABLE_NAME +
-                        " ON " + FoodContract.FoodEntry.TABLE_NAME +
-                        "." + FoodContract.FoodEntry.COLUMN_INGREDIENT_KEY +
-                        " = " + FoodContract.IngredientEntry.TABLE_NAME +
-                        "." + FoodContract.IngredientEntry._ID);
+                        FoodContract.BoxEntry.TABLE_NAME + " ON " +
+                        FoodContract.FoodEntry.TABLE_NAME + "." +
+                        FoodContract.FoodEntry.COLUMN_BOX_KEY + " = " +
+                        FoodContract.BoxEntry.TABLE_NAME + "." +
+                        FoodContract.BoxEntry._ID + " INNER JOIN " +
+                        FoodContract.IngredientEntry.TABLE_NAME + " ON " +
+                        FoodContract.FoodEntry.TABLE_NAME + "." +
+                        FoodContract.FoodEntry.COLUMN_INGREDIENT_KEY + " = " +
+                        FoodContract.IngredientEntry.TABLE_NAME + "." +
+                        FoodContract.IngredientEntry._ID);
     }
 
     private static final String sBoxSelection =
