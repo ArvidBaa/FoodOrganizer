@@ -21,6 +21,8 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity
         implements AddIngredientDialogFragment.AddIngredientDialogListener {
 
+    public static final int PAGE_BOX_LIST = 0;
+    public static final int PAGE_INGREDIENT_LIST = 1;
     public static final int NUM_PAGES = 2;
 
     /**
@@ -95,8 +97,8 @@ public class MainActivity extends ActionBarActivity
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             switch (position) {
-                case 0: return BoxFragment.newInstance(position);
-                case 1: return IngredientFragment.newInstance(position);
+                case PAGE_BOX_LIST: return BoxFragment.newInstance(position);
+                case PAGE_INGREDIENT_LIST: return IngredientFragment.newInstance(position);
                 default: return BoxFragment.newInstance(position);
             }
         }
