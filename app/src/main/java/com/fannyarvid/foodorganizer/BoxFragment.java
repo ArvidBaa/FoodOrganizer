@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +20,23 @@ import com.fannyarvid.foodorganizer.data.FoodContract;
 /**
  * Created by FannyArvid on 2015-04-28.
  */
-public class BoxFragment extends Fragment {
+public class BoxFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final int BOX_LOADER = 0;
+
+    private static final String[] BOX_COLUMNS = {
+            FoodContract.BoxEntry.TABLE_NAME + "." + FoodContract.BoxEntry._ID,
+            FoodContract.BoxEntry.COLUMN_BOX_NAME,
+            FoodContract.BoxEntry.COLUMN_DATE,
+            FoodContract.BoxEntry.COLUMN_STORAGE_TYPE,
+            FoodContract.BoxEntry.COLUMN_HAS_BEEN_IN_FREEZER
+    };
+
+    static final int COL_BOX_ID = 0;
+    static final int COL_BOX_NAME = 1;
+    static final int COL_DATE = 2;
+    static final int COL_STORAGE_TYPE = 3;
+    static final int COL_HAS_BEEN_IN_FREEZER = 4;
 
     private BoxAdapter mBoxAdapter;
     private ListView mListView;
@@ -27,15 +46,7 @@ public class BoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        Uri allBoxUri = FoodContract.BoxEntry.buildAllBoxUri();
-        Cursor cur = getActivity().getContentResolver().query(
-                allBoxUri,
-                null,
-                null,
-                null,
-                null
-        );
-        mBoxAdapter = new BoxAdapter(getActivity(), cur, 0);
+        mBoxAdapter = new BoxAdapter(getActivity(), null, 0);
 
         View view = inflater.inflate(R.layout.fragment_box, container, false);
 
@@ -58,12 +69,40 @@ public class BoxFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        getLoaderManager().initLoader(BOX_LOADER, null, this);
+        super.onActivityCreated(savedInstanceState);
+    }
+
     public static BoxFragment newInstance(int sectionNumber) {
         BoxFragment fragment = new BoxFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Uri allBoxUri = FoodContract.BoxEntry.buildAllBoxUri();
+        return new CursorLoader(getActivity(),
+                allBoxUri,
+                BOX_COLUMNS,
+                null,
+                null,
+                null
+        );
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mBoxAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mBoxAdapter.swapCursor(null);
     }
 
     public static class BoxAdapter extends CursorAdapter {
@@ -87,8 +126,7 @@ public class BoxFragment extends Fragment {
             // viewHolder.nameView.setText("Test box");
 
             TextView textView = (TextView) view.findViewById(R.id.box_list_item_name);
-            int idx_box_name = cursor.getColumnIndex(FoodContract.BoxEntry.COLUMN_BOX_NAME);
-            String boxNameStr = cursor.getString(idx_box_name);
+            String boxNameStr = cursor.getString(COL_BOX_NAME);
             textView.setText(boxNameStr);
         }
 
