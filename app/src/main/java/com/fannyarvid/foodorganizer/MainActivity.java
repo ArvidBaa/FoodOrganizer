@@ -1,5 +1,6 @@
 package com.fannyarvid.foodorganizer;
 
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,10 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fannyarvid.foodorganizer.data.FoodContract;
+
 import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+        implements AddIngredientDialogFragment.AddIngredientDialogListener {
 
     public static final int PAGE_BOX_LIST = 0;
     public static final int PAGE_INGREDIENT_LIST = 1;
@@ -73,6 +77,11 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onAddIngredientDialogPositiveClick(ContentValues values) {
+        // TODO: Make sure the listView updates after adding a new ingredient
+        getContentResolver().insert(FoodContract.IngredientEntry.CONTENT_URI, values);
+    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

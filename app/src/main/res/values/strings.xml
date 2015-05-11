@@ -13,4 +13,9 @@
     <string name="title_activity_food">Food</string>
     <string name="add_box">Add new box</string>
     <string name="add_ingredient">Add new ingredient</string>
+    <string name="add_ingredient_name">Ingredient name</string>
+    <string name="add_ingredient_fridge_time">Storing time in fridge</string>
+    <string name="add_ingredient_frezer_time">Storage time in freezer</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 </resources>
