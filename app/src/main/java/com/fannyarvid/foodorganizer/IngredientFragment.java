@@ -58,6 +58,7 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
 
         mButton = (Button) view.findViewById(R.id.button_add_ingredient);
         mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 AddIngredientDialogFragment dialog = new AddIngredientDialogFragment();
                 dialog.show(getActivity().getFragmentManager(), "AddIngredientDialogFragment");
@@ -84,7 +85,6 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri allIngredientUri = FoodContract.IngredientEntry.buildAllIngredientUri();
-
         return new CursorLoader(getActivity(),
                 allIngredientUri,
                 INGREDIENT_COLUMNS,

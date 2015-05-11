@@ -11,6 +11,7 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class BoxFragment extends Fragment implements LoaderManager.LoaderCallbac
 
     private BoxAdapter mBoxAdapter;
     private ListView mListView;
+    private Button mButton;
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -65,6 +67,15 @@ public class BoxFragment extends Fragment implements LoaderManager.LoaderCallbac
             }
         });
         */
+
+        mButton = (Button) view.findViewById(R.id.button_add_box);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddBoxDialogFragment dialog = new AddBoxDialogFragment();
+                dialog.show(getActivity().getFragmentManager(), "AddBoxDialogFragment");
+            }
+        });
 
         return view;
     }

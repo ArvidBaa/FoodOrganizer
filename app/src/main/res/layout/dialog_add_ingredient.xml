@@ -26,6 +26,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:singleLine="true"
+            android:inputType="textCapSentences"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="16dp"
@@ -53,11 +55,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:singleLine="true"
+            android:inputType="number"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="4dp"
-            android:inputType="number"/>
+            android:layout_marginBottom="4dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -81,11 +84,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:singleLine="true"
+            android:inputType="number"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="number"/>
+            android:layout_marginBottom="16dp"/>
     </LinearLayout>
 
 </LinearLayout>
