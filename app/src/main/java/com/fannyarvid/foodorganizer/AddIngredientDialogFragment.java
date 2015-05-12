@@ -35,7 +35,7 @@ public class AddIngredientDialogFragment extends DialogFragment {
             mListener = (AddIngredientDialogListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
+                    + " must implement AddIngredientDialogListener");
         }
     }
 

@@ -94,7 +94,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onAddBoxDialogPositiveClick(
-            String boxName, int julianDay, int storageType, int hasBeenInFreezer, int[] ingredientsId) {
+            String boxName, int julianDay, int storageType, int hasBeenInFreezer, long[] ingredientsId) {
         ContentValues boxValues = new ContentValues();
         boxValues.put(FoodContract.BoxEntry.COLUMN_BOX_NAME, boxName);
         boxValues.put(FoodContract.BoxEntry.COLUMN_DATE, julianDay);
