@@ -64,7 +64,8 @@ public class AddIngredientDialogFragment extends DialogFragment {
                                 ingredientName,
                                 fridgeTime,
                                 freezerTime,
-                                isInitialIngredient);
+                                isInitialIngredient
+                        );
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

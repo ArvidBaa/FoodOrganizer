@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.fannyarvid.foodorganizer.data.FoodContract;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -94,7 +95,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onAddBoxDialogPositiveClick(
-            String boxName, int julianDay, int storageType, int hasBeenInFreezer, long[] ingredientsId) {
+            String boxName, int julianDay, int storageType, int hasBeenInFreezer, ArrayList<Integer> ingredientsId) {
         ContentValues boxValues = new ContentValues();
         boxValues.put(FoodContract.BoxEntry.COLUMN_BOX_NAME, boxName);
         boxValues.put(FoodContract.BoxEntry.COLUMN_DATE, julianDay);
@@ -105,9 +106,9 @@ public class MainActivity extends ActionBarActivity
 
         int boxId = FoodContract.BoxEntry.getIdFromUri(boxUri);
         ContentValues foodValues = new ContentValues();
-        for (int i = 0; i < ingredientsId.length; i++) {
+        for (int i = 0; i < ingredientsId.size(); i++) {
             foodValues.put(FoodContract.FoodEntry.COLUMN_BOX_KEY, boxId);
-            foodValues.put(FoodContract.FoodEntry.COLUMN_INGREDIENT_KEY, ingredientsId[i]);
+            foodValues.put(FoodContract.FoodEntry.COLUMN_INGREDIENT_KEY, ingredientsId.get(i));
         }
     }
 

@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceLarge"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
 </LinearLayout>
