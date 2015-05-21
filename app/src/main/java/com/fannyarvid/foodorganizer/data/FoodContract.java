@@ -71,6 +71,7 @@ public class FoodContract {
         public static final String COLUMN_STORAGE_TYPE = "storage_type";
 
         public static final String COLUMN_HAS_BEEN_IN_FREEZER = "has_been_in_freezer";
+        private static final String LOG_TAG = BoxEntry.class.getSimpleName();
 
         public static Uri buildBoxUri (long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -78,6 +79,10 @@ public class FoodContract {
 
         public static Uri buildAllBoxUri() {
             return CONTENT_URI;
+        }
+
+        public static int getIdFromUri(Uri uri) {
+            return Integer.parseInt(uri.getPathSegments().get(1));
         }
     }
 

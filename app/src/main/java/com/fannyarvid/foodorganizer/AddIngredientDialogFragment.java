@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-
-import com.fannyarvid.foodorganizer.data.FoodContract;
 
 /**
  * Created by FannyArvid on 2015-05-08.
@@ -21,7 +18,8 @@ public class AddIngredientDialogFragment extends DialogFragment {
     private static final String LOG_TAG = AddIngredientDialogFragment.class.getSimpleName();
 
     public interface AddIngredientDialogListener {
-        public void onAddIngredientDialogPositiveClick(ContentValues values);
+        public void onAddIngredientDialogPositiveClick(
+                String ingredientName, int fridgeTime, int freezerTime, int isInitialIngredient);
     }
 
     AddIngredientDialogListener mListener;
@@ -37,7 +35,7 @@ public class AddIngredientDialogFragment extends DialogFragment {
             mListener = (AddIngredientDialogListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
+                    + " must implement AddIngredientDialogListener");
         }
     }
 
@@ -60,15 +58,14 @@ public class AddIngredientDialogFragment extends DialogFragment {
                         String ingredientName = mIngredientName.getText().toString();
                         int fridgeTime = Integer.valueOf(mFridgeTime.getText().toString());
                         int freezerTime = Integer.valueOf(mFreezerTime.getText().toString());
+                        int isInitialIngredient = 0; // 0 --> false.
 
-                        ContentValues values = new ContentValues();
-                        values.put(FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME, ingredientName);
-                        values.put(FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE, fridgeTime);
-                        values.put(FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FREEZER, freezerTime);
-                        values.put(FoodContract.IngredientEntry.COLUMN_IS_INITIAL_INGREDIENT, 0);
-
-
-                        mListener.onAddIngredientDialogPositiveClick(values);
+                        mListener.onAddIngredientDialogPositiveClick(
+                                ingredientName,
+                                fridgeTime,
+                                freezerTime,
+                                isInitialIngredient
+                        );
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.fannyarvid.foodorganizer;
 
 import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,15 +16,17 @@ import android.view.ViewGroup;
 
 import com.fannyarvid.foodorganizer.data.FoodContract;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity
-        implements AddIngredientDialogFragment.AddIngredientDialogListener {
+        implements AddIngredientDialogFragment.AddIngredientDialogListener, AddBoxDialogFragment.AddBoxDialogListener {
 
     public static final int PAGE_BOX_LIST = 0;
     public static final int PAGE_INGREDIENT_LIST = 1;
     public static final int NUM_PAGES = 2;
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -78,9 +81,35 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onAddIngredientDialogPositiveClick(ContentValues values) {
+    public void onAddIngredientDialogPositiveClick(
+            String ingredientName, int fridgeTime, int freezerTime, int isInitialIngredient) {
         // TODO: Make sure the listView updates after adding a new ingredient
-        getContentResolver().insert(FoodContract.IngredientEntry.CONTENT_URI, values);
+        ContentValues values = new ContentValues();
+        values.put(FoodContract.IngredientEntry.COLUMN_INGREDIENT_NAME, ingredientName);
+        values.put(FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FRIDGE, fridgeTime);
+        values.put(FoodContract.IngredientEntry.COLUMN_STORAGE_TIME_FREEZER, freezerTime);
+        values.put(FoodContract.IngredientEntry.COLUMN_IS_INITIAL_INGREDIENT, isInitialIngredient);
+
+        getContentResolver().insert(FoodContract.IngredientEntry.buildAllIngredientUri(), values);
+    }
+
+    @Override
+    public void onAddBoxDialogPositiveClick(
+            String boxName, int julianDay, int storageType, int hasBeenInFreezer, ArrayList<Integer> ingredientsId) {
+        ContentValues boxValues = new ContentValues();
+        boxValues.put(FoodContract.BoxEntry.COLUMN_BOX_NAME, boxName);
+        boxValues.put(FoodContract.BoxEntry.COLUMN_DATE, julianDay);
+        boxValues.put(FoodContract.BoxEntry.COLUMN_STORAGE_TYPE, storageType);
+        boxValues.put(FoodContract.BoxEntry.COLUMN_HAS_BEEN_IN_FREEZER, hasBeenInFreezer);
+
+        Uri boxUri = getContentResolver().insert(FoodContract.BoxEntry.buildAllBoxUri(), boxValues);
+
+        int boxId = FoodContract.BoxEntry.getIdFromUri(boxUri);
+        ContentValues foodValues = new ContentValues();
+        for (int i = 0; i < ingredientsId.size(); i++) {
+            foodValues.put(FoodContract.FoodEntry.COLUMN_BOX_KEY, boxId);
+            foodValues.put(FoodContract.FoodEntry.COLUMN_INGREDIENT_KEY, ingredientsId.get(i));
+        }
     }
 
     /**
