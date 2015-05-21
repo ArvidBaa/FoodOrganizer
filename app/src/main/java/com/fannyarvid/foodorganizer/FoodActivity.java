@@ -15,8 +15,15 @@ public class FoodActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         if (savedInstanceState == null) {
+
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(FoodFragment.DETAIL_URI, getIntent().getData());
+
+            FoodFragment fragment = new FoodFragment();
+            fragment.setArguments(arguments);
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new FoodFragment())
+                    .add(R.id.container, fragment)
                     .commit();
         }
     }
@@ -34,12 +41,9 @@ public class FoodActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
