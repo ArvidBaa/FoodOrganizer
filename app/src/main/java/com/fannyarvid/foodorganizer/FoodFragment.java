@@ -27,6 +27,7 @@ public class FoodFragment extends Fragment implements LoaderManager.LoaderCallba
     private String[] mSelection;
 
     private static final int FOOD_LOADER = 0;
+    private static final int INGREDIENT_LOADER = 1;
 
     private static final String[] INGREDIENT_COLUMNS = {
             IngredientEntry.TABLE_NAME + "." + IngredientEntry._ID,
@@ -78,6 +79,8 @@ public class FoodFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // TODO: Use switch for the different ids of the loaders (use two loaders btw)
+
         if (mUri != null ) {
             // TODO: get boxId and use it to get corresponding ingredientsId from FoodTable and use that in turn as selection arguments below
             // long boxId =
@@ -96,11 +99,13 @@ public class FoodFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // TODO: Use switch for the different ids (loader.getId()) of the loaders (use two loaders btw)
         mFoodAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        // TODO: Use switch for the different ids (loader.getId()) of the loaders (use two loaders btw)
         mFoodAdapter.swapCursor(null);
     }
 
